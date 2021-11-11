@@ -22,39 +22,57 @@ package edu.augustana.csc305.labs;
 
 public class Hannaldous {
 	
-	// method one to do the thing for Monday's meeting 
-	public static int howbad(int n, String[] x, double roXORZ) {
-		int j = x.length - 1;
-		int ret = 0;
-		n = n; // n = ? 
-		for (int i = 0; i < x.length; i = i + 1) 
-		{
-		if (x[j].length() < n || Help(x[j]).equals("y"))
-			ret++;
-	j--;  }
-		return ret;
-						}
-	// method two helps, and i wrote it at 11:58 p.m. on sunday... 
-	// couldn't find it on stack overflow, so I rolled my pwn. 
-	static String Help(String MAYBE) 
-	{		
-		int yeah = -1;
-		while (yeah++ < MAYBE.length() - 1) {
-			char izard /*PoKeMoN babee*/ = MAYBE.charAt(yeah); 
+	/**
+	 * Determines the number of valid passwords.
+	 * 
+	 * @param minLength - minimum length of chars that the password must be.
+	 * @param x - the password list in the form of an array.
+	 * @return - the number of valid passwords
+	 * 
+	 */
+	public static int goodPasswords(int minLength, String[] x) {
+		
+		int goodPasswords = 0;
+		
+		//indexes through the password array
+		for (int i = 0; i < x.length; i++) {
 			
-			if (! (izard >= 'a' && izard <='z'|| izard >='A' && izard <= 'Z')) return "n"; }
-		return "y";
-	}
+			//checks to see if the password is the minimum required length and has no special characters.
+			//if true, the number of good passwords is incremented by 1.
+			if (x[i].length() >= minLength && noSpecialCharacters(x[i]).equals("true"))
+			goodPasswords++;
+		}
+		return goodPasswords;
+						}
+	/**
+	 * Determines whether or not the password contains a special character.
+	 * 
+	 * @param password - the password being examined
+	 * @return - true or false depending on whether or not the character is a letter/digit.
+	 */
+	static String noSpecialCharacters(String password){		
+		
+		//runs through each character of password.
+		for (int j = 0; j < password.length(); j++) {
+			char index = password.charAt(j);
+			
+			//checks to see if character is a special character and returns false if it is. Otherwise, the loop continues.
+			if (!(Character.isDigit(index)||Character.isLetter(index))) {
+				return "false";
+			}
+		}
+		return "true";
 	
+	}
 	
 	public static void main(String[] args) {
 		
-		System.out.println(Help("bigmoose$"));
-		System.out.println(Help("emusareawesome"));
-		System.out.println(Help("17"));
+		System.out.println(noSpecialCharacters("bigmoose"));
+		System.out.println(noSpecialCharacters("emusareawesome"));
+		System.out.println(noSpecialCharacters("17"));
 
 		String[] passwords = new String[] { "bigmoose$", "emusareawesome", "123goodbye", "ok&y", "17", "cat" };
-		System.out.println(howbad(8,passwords, 0.0));
+		System.out.println(goodPasswords(8,passwords));
 	}
 
 }
