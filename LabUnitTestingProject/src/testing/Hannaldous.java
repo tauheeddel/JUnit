@@ -26,22 +26,23 @@ public class Hannaldous {
 	 * Determines the number of valid passwords.
 	 * 
 	 * @param minLength - minimum length of chars that the password must be.
-	 * @param x - the password list in the form of an array.
+	 * @param passwordList - the password list in the form of an array.
 	 * @return - the number of valid passwords
 	 * 
 	 */
-	public static int goodPasswords(int minLength, String[] x) {
+	public static int goodPasswords(int minLength, String[] passwordList) {
 		
 		int goodPasswords = 0;
 		
 		//indexes through the password array
-		for (int i = 0; i < x.length; i++) {
+		for (int i = 0; i < passwordList.length; i++) {
 			
 			//checks to see if the password is the minimum required length and has no special characters.
 			//if true, the number of good passwords is incremented by 1.
-			if (x[i].length() >= minLength && noSpecialCharacters(x[i]).equals("true"))
-			goodPasswords++;
-		}
+			if (passwordList[i].length() >= minLength && noSpecialCharacters(passwordList[i]) == true) {
+				goodPasswords++;
+			}
+			}	
 		return goodPasswords;
 						}
 	/**
@@ -50,7 +51,7 @@ public class Hannaldous {
 	 * @param password - the password being examined
 	 * @return - true or false depending on whether or not the character is a letter/digit.
 	 */
-	static String noSpecialCharacters(String password){		
+	static boolean noSpecialCharacters(String password){		
 		
 		//runs through each character of password.
 		for (int j = 0; j < password.length(); j++) {
@@ -58,10 +59,10 @@ public class Hannaldous {
 			
 			//checks to see if character is a special character and returns false if it is. Otherwise, the loop continues.
 			if (!(Character.isDigit(index)||Character.isLetter(index))) {
-				return "false";
+				return false;
 			}
 		}
-		return "true";
+		return true;
 	
 	}
 	
