@@ -21,40 +21,43 @@ package edu.augustana.csc305.labs;
 //         (read Skrien appendix B, pp 318-331)
 
 public class Hannaldous {
-	
-	// method one to do the thing for Monday's meeting 
-	public static int howbad(int n, String[] x, double roXORZ) {
-		int j = x.length - 1;
-		int ret = 0;
-		n = n; // n = ? 
-		for (int i = 0; i < x.length; i = i + 1) 
-		{
-		if (x[j].length() < n || Help(x[j]).equals("y"))
-			ret++;
-	j--;  }
-		return ret;
-						}
-	// method two helps, and i wrote it at 11:58 p.m. on sunday... 
-	// couldn't find it on stack overflow, so I rolled my pwn. 
-	static String Help(String MAYBE) 
-	{		
-		int yeah = -1;
-		while (yeah++ < MAYBE.length() - 1) {
-			char izard /*PoKeMoN babee*/ = MAYBE.charAt(yeah); 
-			
-			if (! (izard >= 'a' && izard <='z'|| izard >='A' && izard <= 'Z')) return "n"; }
-		return "y";
-	}
-	
-	
-	public static void main(String[] args) {
+
+	/**
+	 * @param requiredLength - the minimum required length for each password to qualify as good
+	 * @param passwords - an array of passwords
+	 * @return the number of "bad" passwords
+	 */
+	public static int countBadPasswords(int requiredLength, String[] passwords) {
+		int numBadPassword = 0;
 		
-		System.out.println(Help("bigmoose$"));
-		System.out.println(Help("emusareawesome"));
-		System.out.println(Help("17"));
+		for (int i = 0; i < passwords.length; i = i + 1) {
+			if (passwords[i].length() < requiredLength || isBad(passwords[i]))
+				numBadPassword++;
+		}
+		return numBadPassword;
+	}
+
+	/**
+	 * @param password - the password to examine
+	 * @return true if it's "bad" and false otherwise
+	 */
+	static Boolean isBad(String password) {
+		for (int index = 0; index < password.length(); index++) {
+			char token /* Each password's token */ = password.charAt(index);
+			if (!(token >= 'a' && token <= 'z' || token >= 'A' && token <= 'Z'))
+				return false;
+		}
+		return true;
+	}
+
+	public static void main(String[] args) {
+
+		System.out.println(isBad("bigmoose$"));
+		System.out.println(isBad("emusareawesome"));
+		System.out.println(isBad("17"));
 
 		String[] passwords = new String[] { "bigmoose$", "emusareawesome", "123goodbye", "ok&y", "17", "cat" };
-		System.out.println(howbad(8,passwords, 0.0));
+		System.out.println(countBadPasswords(8, passwords));
 	}
 
 }
