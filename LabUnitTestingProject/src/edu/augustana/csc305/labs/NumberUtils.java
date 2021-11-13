@@ -28,7 +28,7 @@ public class NumberUtils {
 		System.out.println(maxOfThree(2,3,1) + " should be 3");
 		System.out.println(maxOfThree(3,1,2) + " should be 3");
 		System.out.println(maxOfThree(3,2,1) + " should be 3");
-		
+		System.out.println(maxOfThree(2,3,3) + " should be 3");
 	}
 
 }
